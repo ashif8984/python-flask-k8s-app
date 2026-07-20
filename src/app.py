@@ -10,7 +10,8 @@ app = Flask(__name__)
 def details():
     return jsonify({
         'hostname': socket.gethostname(),
-        'timestamp': datetime.datetime.now()
+        'timestamp': datetime.datetime.now(),
+        'message': 'Hello from Flask app running in Kubernetes!'
         })
 
 @app.route('/api/v1/healthz')
