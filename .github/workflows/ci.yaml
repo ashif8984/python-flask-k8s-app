@@ -17,14 +17,14 @@ jobs:
         shell: bash
         run: |
           echo "COMMIT_ID=${GITHUB_SHA::6}" >> "$GITHUB_ENV"
-      -
-        name: Login to Docker Hub
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+          
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
@@ -36,13 +36,19 @@ jobs:
     needs: ci
     runs-on: self-hosted
     steps:
-      
-      - name: Install argocd
-        shell: bash
+
+      - name: Install ArgoCD CLI
         run: |
-          curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-amd64
-          chmod +x argocd
-          sudo mv ./argocd /usr/local/bin/argocd
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x /usr/local/bin/argocd
+          argocd version
+
+      # - name: Install argocd
+      #   shell: bash
+      #   run: |
+      #     curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-amd64
+      #     chmod +x argocd
+      #     sudo mv ./argocd /usr/local/bin/argocd
 
       - name: Argocd app sync
         shell: bash
