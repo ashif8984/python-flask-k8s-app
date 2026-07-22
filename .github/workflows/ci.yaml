@@ -47,7 +47,7 @@ jobs:
       - name: Argocd app sync
         shell: bash
         run: |
-          argocd login argocd-server.argocd \
+          argocd login localhost:8080 \
             --insecure  \
             --grpc-web \
             --username admin \
@@ -55,4 +55,4 @@ jobs:
 
           argocd app list | awk '{print $1}' | sed '1d'
 
-          
+# argocd login argocd-server.argocd \

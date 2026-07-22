@@ -12,7 +12,7 @@ def details():
         'hostname': socket.gethostname(),
         'timestamp': datetime.datetime.now(),
         'message': 'Hello! from Ashif app running and Docker and kates',
-        'message': 'Ashif Eqbal !',
+        'message': 'Ashif Eqbal !!',
 
         })
 
