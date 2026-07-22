@@ -52,4 +52,7 @@ jobs:
             --grpc-web \
             --username admin \
             --password  ${{ secrets.ARGOCD_PASSWORD }}
-          argocd app sync python
+
+          argocd app list | awk '{print $1}' | sed '1d'
+
+          
